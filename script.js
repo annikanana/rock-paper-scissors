@@ -12,6 +12,16 @@ function getPlayerChoice() {
     return prompt("Choose either rock, paper or scissors:","Rock").toLowerCase();
 }
 
+function determineWinner(playerTally, computerTally) {
+    if (playerTally > computerTally) {
+        console.log("Congrats, you beat the computer!")
+    } else if (playerTally < computerTally) {
+        console.log("Sorry, but the computer beat you!")
+    } else {
+        console.log("Nobody wins - it's a tie!")
+    }
+}
+
 function playRound(playerSelection,computerSelection) {
 
     // console.log("Player selection: " + playerSelection);
@@ -45,7 +55,6 @@ function playRound(playerSelection,computerSelection) {
 // console.log(playRound(getPlayerChoice(),getComputerChoice()));
 
 // Play a game of 5 rounds
-
 function game() {
 
 let playerTally = 0;
@@ -72,7 +81,7 @@ let computerTally = 0;
         }
     }
 
-    console.log("Player tally: " + playerTally + " Computer tally: " + computerTally);
+    determineWinner(playerTally,computerTally);
 
 }
 
