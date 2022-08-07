@@ -66,28 +66,26 @@ let computerTally = 0;
         let winner = playRound(getPlayerChoice(),getComputerChoice());
 
         if (winner === "player") {
-            playerTally++;
+            playerTally++; // If the player wins, add one to the playerTally
             console.log("You win this round!")
             console.log("Round " + (i + 1) + ": Player: " + playerTally + " Computer: " + computerTally);
 
-        } else if (winner === "computer")
-        {
-            computerTally++;
+        } else if (winner === "computer") {
+            computerTally++; // If the computer wins, add one to the computerTally
             console.log("You lose this round!");
             console.log("Round " + (i + 1) + ": Player: " + playerTally + " Computer: " + computerTally);
-        } else {
+        } else { // If it's a tie, then exit the loop
             console.log("It's a tie!");
             console.log("Round " + (i + 1) + ": Player: " + playerTally + " Computer: " + computerTally);
         }
     }
 
-    determineWinner(playerTally,computerTally);
+    determineWinner(playerTally,computerTally); // After 5 rounds, determine which tally is higher and report back the results
 
 }
 
 game();
 
-// If the player wins, add one to the playerTally
-// If the computer wins, add one to the computerTally
-// If it's a tie, then exit the loop
-// After 5 rounds, determine which tally is higher and report back the results
+
+
+
