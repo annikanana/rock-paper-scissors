@@ -9,16 +9,18 @@ function getComputerChoice() {
 // Let the player enter their choice of either rock, paper, or scissors
 
 function getPlayerChoice() {
-    return prompt("Choose either rock, paper or scissors:","Rock").toLowerCase();
-}
-
-function determineWinner(playerTally, computerTally) {
-    if (playerTally > computerTally) {
-        console.log("Congrats, you beat the computer!")
-    } else if (playerTally < computerTally) {
-        console.log("Sorry, but the computer beat you!")
+    let playerSelection = prompt("Choose either rock, paper or scissors:","Rock");
+    
+    if (playerSelection === null) {
+        return "invalid";
     } else {
-        console.log("Nobody wins - it's a tie!")
+        playerSelection = playerSelection.toLowerCase();
+
+        if (playerSelection === "rock" || playerSelection === "paper" || playerSelection === "scissors") {
+            return playerSelection;
+        } else {
+            return "invalid";
+        }
     }
 }
 
@@ -26,8 +28,10 @@ function playRound(playerSelection,computerSelection) {
 
     // console.log("Player selection: " + playerSelection);
     // console.log("Computer selection: " + computerSelection);
-
-    if (playerSelection === computerSelection) {    // If the computer and the player has selected the same option, return "Tie"
+    if (playerSelection === "invalid") {
+        return "invalid"
+    }
+    else if (playerSelection === computerSelection) {    // If the computer and the player has selected the same option, return "Tie"
         return;
     } else if (playerSelection === "rock") {   
         if (computerSelection === "scissors") {   // If the player has selected rock and the computer has selected scissors, return "Player wins"
@@ -47,12 +51,23 @@ function playRound(playerSelection,computerSelection) {
         } else {    // If the player has selected scissors and the computer has selected rock, return "Computer wins"
             return "computer";
         }
-    } else {    // Else if the player has entered an invalid choice display an error message "Choose either rock, paper or scissors!"
-        return "Please enter a valid option: rock, paper or scissors."
     }
 }
 
-// console.log(playRound(getPlayerChoice(),getComputerChoice()));
+
+function determineWinner(playerTally, computerTally) {
+    if (playerTally > computerTally) {
+        console.log("Congrats, you beat the computer!")
+    } else if (playerTally < computerTally) {
+        console.log("Sorry, but the computer beat you!")
+    } else {
+        console.log("Nobody wins - it's a tie!")
+    }
+}
+
+function printRoundResult(roundNumber,playerTally,computerTally) {
+    console.log("Round " + roundNumber + ": Player: " + playerTally + " Computer: " + computerTally);
+}
 
 // Play a game of 5 rounds
 function game() {
@@ -65,18 +80,22 @@ let computerTally = 0;
         // console.log("Round " + (i + 1) + ": " + playRound(getPlayerChoice(),getComputerChoice()));
         let winner = playRound(getPlayerChoice(),getComputerChoice());
 
-        if (winner === "player") {
+        if (winner === "invalid") {
+            computerTally++;
+            console.log("Player entered invalid choice. Computer wins by default!");
+            printRoundResult((i + 1),playerTally,computerTally);
+        }
+        else if (winner === "player") {
             playerTally++; // If the player wins, add one to the playerTally
-            console.log("You win this round!")
-            console.log("Round " + (i + 1) + ": Player: " + playerTally + " Computer: " + computerTally);
-
+            console.log("You win this round!");
+            printRoundResult((i + 1),playerTally,computerTally);
         } else if (winner === "computer") {
             computerTally++; // If the computer wins, add one to the computerTally
             console.log("You lose this round!");
-            console.log("Round " + (i + 1) + ": Player: " + playerTally + " Computer: " + computerTally);
+            printRoundResult((i + 1),playerTally,computerTally);
         } else { // If it's a tie, then exit the loop
             console.log("It's a tie!");
-            console.log("Round " + (i + 1) + ": Player: " + playerTally + " Computer: " + computerTally);
+            printRoundResult((i + 1),playerTally,computerTally);
         }
     }
 
