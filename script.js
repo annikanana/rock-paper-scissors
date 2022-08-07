@@ -9,11 +9,10 @@ function getComputerChoice() {
 // Let the player enter their choice of either rock, paper, or scissors
 
 function getPlayerChoice() {
-    return prompt("Choose either rock, paper or scissors:").toLowerCase();
+    return prompt("Choose either rock, paper or scissors:","Rock").toLowerCase();
 }
 
-
-function playOneRound(playerSelection,computerSelection) {
+function playRound(playerSelection,computerSelection) {
 
     console.log("Player selection: " + playerSelection);
     console.log("Computer selection: " + computerSelection);
@@ -43,4 +42,23 @@ function playOneRound(playerSelection,computerSelection) {
     }
 }
 
-console.log(playOneRound(getPlayerChoice(),getComputerChoice()));
+//console.log(playRound(getPlayerChoice(),getComputerChoice()));
+
+// Play a game of 5 rounds
+
+function game() {
+
+    // For each round, call the playRound function to determine a winner
+    for (let i = 0; i < 5; i++) {
+        console.log("Round " + i + ": " + playRound(getPlayerChoice(),getComputerChoice()));
+
+    }
+
+}
+
+game();
+
+// If the player wins, add one to the playerTally
+// If the computer wins, add one to the computerTally
+// If it's a tie, then exit the loop
+// After 5 rounds, determine which tally is higher and report back the results
