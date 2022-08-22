@@ -2,12 +2,26 @@ const rock = document.getElementById('rock');
 const paper = document.getElementById('paper');
 const scissors = document.getElementById('scissors');
 const results = document.getElementById('results');
+const reset = document.getElementById('reset');
+const winnerDiv = document.getElementById('winner');
+const options = document.getElementById('options'); 
 let playerTally = 0;
 let computerTally = 0;
 
 rock.addEventListener('click', playRound);
 paper.addEventListener('click', playRound);
 scissors.addEventListener('click', playRound);
+reset.addEventListener('click', resetGame);
+
+function resetGame() {
+    rock.disabled = false;
+    paper.disabled = false;
+    scissors.disabled = false;
+    playerTally = 0;
+    computerTally = 0;
+    winnerDiv.style.display = "none";
+    options.style.display = "block";
+}
 
 // Give the computer a random choice of either rock, paper, or scissors
 function getComputerChoice() {
@@ -33,16 +47,17 @@ function outputResults(playerSelection,computerSelection,result) {
 
 function callWinner(playerTally, computerTally) {
 
-    let winnerDiv = document.getElementById('winner');     
-
     rock.disabled = true;
     paper.disabled = true;
     scissors.disabled = true;
 
+    winnerDiv.style.display = "block";
+    options.style.display = "none";
+
     if(playerTally === 5) {
-        winnerDiv.innerText = "Game over. Player wins!";
+        winnerDiv.firstElementChild.innerText = "Game over. You've managed to fend off kitty! Enjoy the snooze.";
     } else if (computerTally === 5) {
-        winnerDiv.innerText = "Game over. Computer wins!";
+        winnerDiv.firstElementChild.innerText = "Game over. Kitty is hungry and persistent! Time to get out of bed.";
     }
 }
 
@@ -56,26 +71,26 @@ function playRound(e) {
         result = "tie";
     } else if (playerSelection === "rock") {   
         if (computerSelection === "scissors") {   // If the player has selected rock and the computer has selected scissors, return "Player wins"
-            result = "player";
+            result = "Kitty jumps off the bed to play with the ball. You win this round!";
             playerTally++;
         } else {    // If the player has selected rock and the computer has selected paper, return "Computer wins"
-            result = "computer";
+            result = "You throw the ball but end up accidentally redecorating your dresser. Kitty wins this round!";
             computerTally++;
         }
     } else if (playerSelection === "paper") {  
         if (computerSelection === "rock") { // If the player has selected paper and the computer has selected rock, return "Player wins"
-            result = "player";
+            result = "Kitty jumps but bounces off the blanket. You win this round!";
             playerTally++;
         } else {    // If the player has selected paper and the computer has selected scissors, return "Computer wins"
-            result = "computer";
+            result = "You pull up the blanket, but kitty's got her claws out. Ouch. Kitty wins this round!";
             computerTally++;
         }
     } else if (playerSelection === "scissors") {
         if (computerSelection === "paper") { // If the player has selected scissors and the computer has selected paper, return "Player wins"
-            result = "player";
+            result = "Kitty thinks your pot plant looks better on the floor. Your ears are blissfully blocked by your pillow. You win this round!";
             playerTally++;
         } else {    // If the player has selected scissors and the computer has selected rock, return "Computer wins"
-            result = "computer";
+            result = "You cover your face with a pillow, but that can't stop kitty's jump on your belly. Kitty wins this round!";
             computerTally++;
         }
     }

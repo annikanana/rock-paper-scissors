@@ -16,6 +16,16 @@ button {
     border: none;
 }
 
+#winner, #options {
+    height: 200px;
+    background: coral;
+    text-align: center;
+}
+
+#winner {
+    display: none;
+}
+
 #results {
     display: flex;
     background: pink;
