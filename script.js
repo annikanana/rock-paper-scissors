@@ -19,6 +19,8 @@ function resetGame() {
     scissors.disabled = false;
     playerTally = 0;
     computerTally = 0;
+    document.querySelector('#player .score').innerText = playerTally;
+    document.querySelector('#computer .score').innerText = computerTally;
     winnerDiv.style.display = "none";
     options.style.display = "block";
 }
@@ -47,6 +49,8 @@ function outputResults(playerSelection,computerSelection,result) {
 
 function callWinner(playerTally, computerTally) {
 
+    let winnerResult = document.querySelector('#winner p');
+
     rock.disabled = true;
     paper.disabled = true;
     scissors.disabled = true;
@@ -55,9 +59,9 @@ function callWinner(playerTally, computerTally) {
     options.style.display = "none";
 
     if(playerTally === 5) {
-        winnerDiv.firstElementChild.innerText = "Game over. You've managed to fend off kitty! Enjoy the snooze.";
+        winnerResult.innerText = "You've managed to fend off kitty! Enjoy the snooze.";
     } else if (computerTally === 5) {
-        winnerDiv.firstElementChild.innerText = "Game over. Kitty is hungry and persistent! Time to get out of bed.";
+        winnerResult.innerText = "Kitty is hungry and persistent! Time to get out of bed.";
     }
 }
 
@@ -67,31 +71,35 @@ function playRound(e) {
     let computerSelection = getComputerChoice();
     let result = "";
 
-    if (playerSelection === computerSelection) {    // If the computer and the player has selected the same option, return "Tie"
-        result = "tie";
-    } else if (playerSelection === "rock") {   
+    if (playerSelection === "rock") {   
         if (computerSelection === "scissors") {   // If the player has selected rock and the computer has selected scissors, return "Player wins"
-            result = "Kitty jumps off the bed to play with the ball. You win this round!";
+            result = "Kitty leaves you alone to play with the ball. You win this round!";
             playerTally++;
-        } else {    // If the player has selected rock and the computer has selected paper, return "Computer wins"
+        } else if (computerSelection === "paper") {    // If the player has selected rock and the computer has selected paper, return "Computer wins"
             result = "You throw the ball but end up accidentally redecorating your dresser. Kitty wins this round!";
             computerTally++;
+        } else {
+            result = "You throw the ball but Kitty jumps to the other side of the bed. It's a tie.";
         }
     } else if (playerSelection === "paper") {  
         if (computerSelection === "rock") { // If the player has selected paper and the computer has selected rock, return "Player wins"
             result = "Kitty jumps but bounces off the blanket. You win this round!";
             playerTally++;
-        } else {    // If the player has selected paper and the computer has selected scissors, return "Computer wins"
+        } else if (computerSelection === "scissors") {    // If the player has selected paper and the computer has selected scissors, return "Computer wins"
             result = "You pull up the blanket, but kitty's got her claws out. Ouch. Kitty wins this round!";
             computerTally++;
+        } else {
+            result = "You hide your face under your blanket, but Kitty is patient. It's a tie.";
         }
     } else if (playerSelection === "scissors") {
         if (computerSelection === "paper") { // If the player has selected scissors and the computer has selected paper, return "Player wins"
-            result = "Kitty thinks your pot plant looks better on the floor. Your ears are blissfully blocked by your pillow. You win this round!";
+            result = "Kitty thinks your pot plant looks better on the floor. The noise is blissfully blocked by your pillow. You win this round!";
             playerTally++;
-        } else {    // If the player has selected scissors and the computer has selected rock, return "Computer wins"
+        } else if (computerSelection === "rock") {    // If the player has selected scissors and the computer has selected rock, return "Computer wins"
             result = "You cover your face with a pillow, but that can't stop kitty's jump on your belly. Kitty wins this round!";
             computerTally++;
+        } else {
+            result = "Kitty attacks with her claws but lands on your pillow. It's a tie.";
         }
     }
 

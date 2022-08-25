@@ -1,5 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Paytone+One&family=Roboto:wght@400;700&display=swap');
+
 body {
     margin: 0;
+    background: #141826;
+    color: #D5E2F2;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    justify-content: center;
+}
+
+h1, h2 {
+    color: #D5E2F2;
+    font-family: 'Paytone One', sans-serif;
+}
+
+.purple {
+    color: #8987EB;
+}
+
+.pink {
+    color: #C280F6;
+}
+
+.yellow {
+    color: #F2E9BB;
 }
 
 .container {
@@ -8,18 +32,43 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
+    width: 600px; 
 }
 
-button {
-    background: pink;
-    padding: 30px;
-    border: none;
+.options-btns {
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.options-btns button {
+    width: 175px;
+    height: 100px;
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
+    border-radius: 15px;
+    font-size: 1.1em;
+    background: #C280F6;
+    border: 0px;
+    padding: 10px;
+}
+
+#winner button {
+    width: 175px;
+    height: 50px;
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
+    border-radius: 15px;
+    font-size: 1.1em;
+    background: #F2E9BB;
+    border: 0px;
+    padding: 10px; 
 }
 
 #winner, #options {
-    height: 200px;
-    background: coral;
     text-align: center;
+    width: 100%;
+    height: 200px;
 }
 
 #winner {
@@ -28,11 +77,16 @@ button {
 
 #results {
     display: flex;
-    background: pink;
-    width: 600px;
     justify-content: space-between;
     text-align: center;
     margin: 20px 0;
+    background: #D5E2F2;
+    color: #000;
+    width: 100%;
+}
+
+#results h2 {
+    color: #000;
 }
 
 #results div {
