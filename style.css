@@ -55,6 +55,16 @@ h1, h2 {
     border: 0px;
 }
 
+#winner {
+    display: none;
+}
+
+#winner, #options {
+    text-align: center;
+    width: 100%;
+    height: 200px;
+}
+
 #winner button {
     width: 175px;
     height: 50px;
@@ -65,16 +75,6 @@ h1, h2 {
     background: #F2E9BB;
     color: #141826;
     border: 0px;
-}
-
-#winner, #options {
-    text-align: center;
-    width: 100%;
-    height: 200px;
-}
-
-#winner {
-    display: none;
 }
 
 #battleground {
@@ -88,6 +88,15 @@ h1, h2 {
     border-radius: 20px;
     padding: 20px;
     box-sizing: border-box;
+}
+
+#round-winner {
+    height: 75px;
+    width: 100%;
+    font-size: 1em;
+    font-style: italic;
+    color: #8987EB;
+    font-weight: bold;
 }
 
 #results {
@@ -116,16 +125,6 @@ h1, h2 {
     font-weight: bold;
     margin: 0;
 }
-
-#round-winner {
-    height: 75px;
-    width: 100%;
-    font-size: 1em;
-    font-style: italic;
-    color: #8987EB;
-    font-weight: bold;
-}
-
 
 @media only screen and (max-width: 480px) {
 

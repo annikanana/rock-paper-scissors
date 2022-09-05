@@ -4,7 +4,12 @@ const pillow = document.getElementById('pillow');
 const results = document.getElementById('results');
 const reset = document.getElementById('reset');
 const winnerDiv = document.getElementById('winner');
-const options = document.getElementById('options'); 
+const options = document.getElementById('options');
+const playerScoreDiv = document.querySelector('#player .score');
+const computerScoreDiv = document.querySelector('#computer .score');
+const playerChoiceDiv = document.querySelector('#player .choice');
+const computerChoiceDiv = document.querySelector('#computer .choice');
+const roundWinner = document.querySelector('#round-winner');
 let playerTally = 0;
 let computerTally = 0;
 
@@ -14,16 +19,22 @@ pillow.addEventListener('click', playRound);
 reset.addEventListener('click', resetGame);
 
 function resetGame() {
-    ball.disabled = false;
-    blanket.disabled = false;
-    pillow.disabled = false;
-    playerTally = 0;
-    computerTally = 0;
-    document.querySelector('#player .score').innerText = playerTally;
-    document.querySelector('#computer .score').innerText = computerTally;
-    document.querySelector('#round-winner').innerText = "";
+    // Hide winner div and display choice buttons div
     winnerDiv.style.display = "none";
     options.style.display = "block";
+
+    // Reset tallies
+    playerTally = 0;
+    computerTally = 0;
+    playerScoreDiv.innerText = playerTally;
+    computerScoreDiv.innerText = computerTally;
+
+    // Clear our round winner text
+    roundWinner.innerText = "";
+
+    // Clear out player and computer choice text
+    playerChoiceDiv.innerText = "";
+    computerChoiceDiv.innerText = "";
 }
 
 // Give the computer a random choice of either rock, paper, or scissors
@@ -34,31 +45,26 @@ function getComputerChoice() {
 }
 
 function outputResults(playerSelection,computerSelection,result) {
-
     // Output player and computer selection
-    document.querySelector('#player .choice').innerText = playerSelection;
-    document.querySelector('#computer .choice').innerText = computerSelection;
+    playerChoiceDiv.innerText = playerSelection;
+    computerChoiceDiv.innerText = computerSelection;
 
     // Output winner
-    document.querySelector('#round-winner').innerText = result;
+    roundWinner.innerText = result;
 
     // Output tally
-    document.querySelector('#player .score').innerText = playerTally;
-    document.querySelector('#computer .score').innerText = computerTally;
-
+    playerScoreDiv.innerText = playerTally;
+    computerScoreDiv.innerText = computerTally;
 }
 
 function callWinner(playerTally, computerTally) {
-
     let winnerResult = document.querySelector('#winner p');
 
-    ball.disabled = true;
-    blanket.disabled = true;
-    pillow.disabled = true;
-
+    // Hide options and display winner div
     winnerDiv.style.display = "block";
     options.style.display = "none";
 
+    // Determine winner and output to DOM
     if(playerTally === 5) {
         winnerResult.innerText = "You've managed to fend off kitty! Enjoy the snooze.";
     } else if (computerTally === 5) {
@@ -90,7 +96,7 @@ function playRound(e) {
             result = "You pull up the blanket, but kitty's got her claws out. Ouch. Kitty wins this round!";
             computerTally++;
         } else {
-            result = "You hide your face under your blanket, but Kitty is patient. It's a tie.";
+            result = "You hide your face under your blanket. In retaliation Kitty thinks your pillow looks better on the floor. It's a tie.";
         }
     } else if (playerSelection === "pillow") {
         if (computerSelection === "redecorate") { // If the player has selected scissors and the computer has selected paper, return "Player wins"
@@ -112,45 +118,4 @@ function playRound(e) {
         callWinner(playerTally, computerTally);
     }
 }
-
-
-// function printRoundResult(roundNumber,playerTally,computerTally) {
-//     console.log("Round " + roundNumber + ": Player: " + playerTally + " Computer: " + computerTally);
-// }
-
-// // Play a game of 5 rounds
-// function game() {
-
-// let playerTally = 0;
-// let computerTally = 0;
-
-//     // For each round, call the playRound function to determine a winner
-//     for (let i = 0; i < 5; i++) {
-//         // console.log("Round " + (i + 1) + ": " + playRound(getPlayerChoice(),getComputerChoice()));
-//         let winner = playRound(getPlayerChoice(),getComputerChoice());
-
-//         if (winner === "invalid") {
-//             computerTally++;
-//             console.log("Player entered invalid choice. Computer wins by default!");
-//             printRoundResult((i + 1),playerTally,computerTally);
-//         }
-//         else if (winner === "player") {
-//             playerTally++; // If the player wins, add one to the playerTally
-//             console.log("You win this round!");
-//             printRoundResult((i + 1),playerTally,computerTally);
-//         } else if (winner === "computer") {
-//             computerTally++; // If the computer wins, add one to the computerTally
-//             console.log("You lose this round!");
-//             printRoundResult((i + 1),playerTally,computerTally);
-//         } else if (winner === "tie") { // If it's a tie, then exit the loop
-//             console.log("It's a tie!");
-//             printRoundResult((i + 1),playerTally,computerTally);
-//         }
-//     }
-
-//     determineWinner(playerTally,computerTally); // After 5 rounds, determine which tally is higher and report back the results
-
-// }
-
-// game();
 
